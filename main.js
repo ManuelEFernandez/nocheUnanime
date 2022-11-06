@@ -8,6 +8,7 @@ const todosBotonesMostrar = document.querySelector(".botones-mostrar");
 const autoresLista =  document.querySelector(".lista-autores");
 const botonCarga = document.getElementById("boton-carga");
 const cajaInfoLibros = document.getElementById("caja-info-libros");
+const cajaAbout2 = document.getElementById("ca2");
 
   let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
@@ -351,5 +352,20 @@ const renderizarInfoLibro = (libro) =>  {
   
   
 }
+
+const renderizarAbout = () => {
+
+  let librosPorColeccion = agruparporCriterio(arrayCatalogoLibros, "coleccion");
+  let librosPorAno = agruparporCriterio(arrayCatalogoLibros, "año");
+  console.log(librosPorColeccion);
+  cajaAbout2.innerHTML = `
+  <h5>nuestro catálogo</h5>
+  <p>En <strong>noche unánime</strong> contamos con 3 colecciones: <strong>narrativa, ensayos, exotopías</strong>. <strong>Narrativa</strong> se encuentra dedicada al desarrollo de todo tipo de historias por autores argentinos, y cuenta con ${librosPorColeccion.Narrativa} títulos. En <strong>ensayos</strong> se despliegan algunas de las que consideramos las ideas y conceptos literarios más lúcidos del momento, y cuenta con ${librosPorColeccion.Ensayos} títulos. Por último, en <strong>exotopías</strong> nuestros lectores podrán encontrar textos inclasificables, fuera de la norma, rupturistas; la colección posee ${librosPorColeccion.Exotopías} títulos.
+  <p>Hemos publicado ${librosPorAno["2019"]} libros en 2019, ${librosPorAno["2020"]} en 2020, ${librosPorAno["2021"]} en 2021 y ${librosPorAno["2022"]} en 2022. Para 2023 ya se encuentran en preparación 3 títulos nuevos.</p>
+  
+  `
+}
+
+renderizarAbout();
 
 init();

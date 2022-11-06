@@ -7,6 +7,12 @@
    
 }
 
+a {
+
+
+  color: black;
+}
+
 body {
     display: flex;
     min-height: 100vh;
@@ -183,6 +189,7 @@ body {
     width: 153px;
     height: 216px;
     border: 1px solid grey;
+    
 
   }
   
@@ -196,7 +203,6 @@ body {
   
   .novedad:hover {
     box-shadow: 4px 4px 0px rgba(124, 124, 124, 0.907);
-    background-color: rgb(58, 58, 58);
     
   }
   .titulo-catalogo {
@@ -322,13 +328,15 @@ body {
 
     height: 200px;
     width: 280px;
-    background-color: rgba(16, 16, 16, 0.938);
+    background-color: rgba(255, 255, 255, 0.938);
     padding: 15px;
-    color: white;
+    color: rgb(35, 35, 35);
     gap: 10px;
     display: flex;
     flex-direction: column;
     font-family: 'Vollkorn';
+    border: 1px solid black;
+    border-radius: 10px;
 
   }
 
@@ -378,6 +386,7 @@ body {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+    
   }
 
   h2 {
@@ -433,7 +442,7 @@ body {
 
   footer {
     border-top: 1px solid rgb(185, 185, 185);
-    height: 100px;
+    height: auto;
     background-color: rgb(227, 227, 227);
     width: 100vw;
   }
@@ -615,24 +624,44 @@ body {
   .precio-libro {
 
     margin-top: 4px;
+    
   }
 
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 650px) {
 
+    
     .info-libro {
       top: 10px;
       flex-direction:column-reverse;
       gap: 20px;
-      width: 100%;
-      height: auto;
-      font-size: 14px
+      width: 90%;
+      height: 90%;
+      font-size: 14px;
+      overflow-x: hidden;
+      overflow-y: scroll;
+      min-width: 320px;
+      
+    }
+
+    .mas-data-libro {
+
+      min-width: 100px;
+      margin-bottom: 15px;
+      
     }
 
     .part-izq {
+      padding-top: 10px;
+      border-top: 1px solid black;
       gap: 10px;
-      justify-content: flex-start;
-      align-items: center;
+      justify-content: space-between;
+      align-items: flex-end;
+      
       flex-direction: row;
+      width: 100%;
+      border-right: none;
+      
+      
     }
     .barra-opciones {
         min-width: 120px;
@@ -696,3 +725,315 @@ body {
       
     }
   }
+
+
+  .ul-footer {
+
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+   
+    
+  }
+
+  .li-footer {
+
+    border: 1px solid black;
+    width: 200px;
+    padding: 3px;
+    font-size: 12px;
+  }
+
+  .lado-derecho-footer {
+
+    display: flex;
+  }
+
+  .footer {
+
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 40px;
+    align-items: center;
+  }
+
+  .logo-footer {
+
+    height: 50px;
+    width: 50px;
+  }
+
+  .lado-izquierdo-footer {
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+  }
+
+  .redes-sociales {
+
+    display: flex;
+    gap: 20px;
+  }
+
+  .fa-brands {
+
+    font-size: 25px;
+    color: rgb(33, 33, 33);
+    cursor: pointer;
+  }
+
+  .fa-twitter {
+
+   
+  }
+
+  .fa-twitter:hover {
+
+    color: #8ecdf3;
+    text-shadow: 0px 0px 10px #8eccf3a3;;
+  }
+
+  .fa-facebook:hover {
+  color: #98add9;
+  text-shadow: 0px 0px 10px #98add989;
+
+}
+
+.fa-instagram-square:hover {
+  color: #de799b;
+  text-shadow: 0px 0px 10px #de799b8a;
+  
+
+}
+
+
+
+.seccion-tres {
+
+  width: 100%;
+  height:  auto;
+  border-top: 2px solid rgb(156, 156, 156);
+  font-family: 'DM sans';
+  display: flex;
+ 
+  background-color: rgb(212, 224, 231);
+
+}
+
+.caja-titulo-about {
+  padding-left: 60px;
+  padding: 20px;
+  font-size: 24px;
+  width: 250px;
+  height: 60px;
+  background-color: white;
+  box-shadow: 4px 4px 0px black;
+  display: flex;
+  justify-content: flex-end;
+
+}
+
+.about-container {
+
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+}
+
+.caja-about {
+
+  min-width: 320px;
+  max-width: 500px;
+  height: auto;
+  background-color: white;
+  box-shadow: 4px 4px 0px black;
+  padding: 30px;
+  z-index: 2;
+}
+
+.ca1 {
+
+  
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: justify;
+}
+
+.cita-borges {
+
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.ca2 {
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: justify;
+}
+
+h5 {
+
+  font-size: 16px;
+}
+
+.ca1-adorno {
+
+  display: flex;
+  gap: 0px;
+}
+
+.adornos {
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  align-items: flex-end;
+  
+}
+
+.adorno {
+  
+  height: 100px;
+  background-color: white;
+  border-left: 1px solid black;
+  border-top: 1px solid black;
+  
+}
+.auno {
+
+  width: 120px;
+  background-image: url(/adornos/adorno3.jpg);
+  background-size: cover;
+  
+  
+  
+}
+
+.ados {
+
+  width: 190px;
+  background-image: url(/adornos/adorno2.png);
+  background-size: cover;
+
+}
+
+.atres {
+
+  width: 260px;
+  background-image: url(/adornos/adorno1.jpg);
+  background-size: cover;
+  
+
+}
+
+.auno2 {
+
+  width: 120px;
+  background-image: url(/adornos/adorno4.png);
+  background-size: cover;
+  border-right: 1px solid black;
+  
+  
+  
+}
+
+.ados2 {
+
+  width: 190px;
+  background-image: url(/adornos/adorno5.jpg);
+  background-size: cover;
+  border-right: 1px solid black;
+
+}
+
+.atres2 {
+
+  width: 260px;
+  background-image: url(/adornos/adorno6.jpg);
+  background-size: cover;
+  border-right: 1px solid black;
+  
+
+}
+
+
+.aca2 {
+
+  align-items: flex-start;
+  z-index: 1;
+}
+
+.ca2-adorno {
+
+  display: flex;
+  gap: 0px;
+}
+
+@media screen and (max-width: 700px) {
+
+  .ul-footer {
+
+    padding: 20px 10px;
+  }
+
+  .footer {
+
+    flex-direction: column;
+    
+  }
+
+  .lado-izquierdo-footer {
+
+    align-items: center;
+  }
+
+  .adornos {
+    display: none;
+  }
+
+  .about-container {
+    
+    justify-content: center;
+
+    }
+
+  .lado-derecho-footer {
+
+    padding: 0px;
+    gap: 0px;
+  }
+  .li-footer {
+
+    width: 140px;
+  }
+}
+
+.seccion-cuatro {
+
+  height: 80vh;
+  background-color: white;
+}
+
+.seccion-tres-fondo {
+
+  height: 100%;
+  width: 100%;
+  background-image: url(/secciontres.png);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-position: -400px 0px;
+  background-size: cover;
+  padding: 60px 20px;
+}
