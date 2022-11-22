@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Acceso</title>
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
+    <script
+      src="https://kit.fontawesome.com/b7df5782e3.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <header class="header-main" id="header-main">
+    <a href="../index.html"
+      ><img src="../logo.png" alt="logo nocheUnánime" class="img-logo"
+    /></a>
+    <nav class="nav-header">
+      <ul class="ul-header" id="ul-header">
+        <li class="li-header">
+          <a href="../index.html#punto-ref-cat">Catálogo</a>
+        </li>
+        <li class="li-header">
+          <a href="../index.html#punto-ref-about">About</a>
+        </li>
+        <li class="li-header">
+          <a href="../index.html#punto-ref-contacto">Contacto</a>
+        </li>
+        <li class="li-header"><a href="/acceso/index.html">Acceso</a></li>
+        <li class="menuH" id="menuH"><i class="fa-solid fa-bars"></i></li>
+      </ul>
+      <div class="carrito-compra" id="carrito-compra">
+        <i class="fa-solid fa-cart-shopping"></i>
+      </div>
+    </nav>
+  </header>
+  <body>
+    <div class="seccion-uno">
+        <div class="seccion-uno-acceso">
+      <div class="caja-acceso">
+        <h4 class="info-registro">
+          Completá la siguiente información para registrarte:
+        </h4>
+
+        <div class="campos">
+          <form class="form-registro" action="" id="form">
+            <div class="input-container">
+              <label class="label-usuario" for="usuario"
+                >Nombre de usuario</label
+              >
+              <input
+                type="text"
+                name="usuario"
+                id="usuario"
+                class="input-acceso"
+              />
+              <small class="mensaje-error-registro">
+              </small>
+            </div>
+
+           
+
+            <div class="input-container">
+              <label class="label-usuario" for="contraseña">Contraseña</label>
+              <input
+                type="password"
+                name="contraseña"
+                id="password"
+                class="input-acceso"
+              />
+              <small class="mensaje-error-registro"></small>
+            </div>
+
+            <div class="input-container" id="input-email">
+                <label class="label-usuario" for="e-mail" id="label-email">E-mail</label>
+                <input
+                  type="text"
+                  name="e-mail"
+                  id="e-mail"
+                  class="input-acceso"
+                />
+                <small class="mensaje-error-registro"></small
+                >
+              </div>
+            <button type="submit" class="registro">
+              Registro / Iniciar sesión
+            </button>
+          </form>
+          <div class="botones-registro">
+            <button class="acceder-con-cuenta" id="acceso-cuenta">
+              Ya tengo cuenta
+            </button>
+            <button class="olvido">Olvido contraseña/usuario</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <script src="acceso.js"></script>
+  </body>
+</html>

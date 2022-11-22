@@ -1,184 +1,153 @@
 const catalogo = document.getElementById("catalogo-libros");
-const mostrarTodos = document.querySelector(".mostrar-todos")
+const mostrarTodos = document.querySelector(".mostrar-todos");
 const mostrarNarrativa = document.querySelector(".mostrar-narrativa");
 const mostrarEnsayos = document.querySelector(".mostrar-ensayo");
 const mostrarExotopias = document.querySelector(".mostrar-exotopias");
 const botonesMostrar = document.querySelectorAll(".boton-mostrar");
 const todosBotonesMostrar = document.querySelector(".botones-mostrar");
-const autoresLista =  document.querySelector(".lista-autores");
+const autoresLista = document.querySelector(".lista-autores");
 const botonCarga = document.getElementById("boton-carga");
 const cajaInfoLibros = document.getElementById("caja-info-libros");
 const cajaAbout2 = document.getElementById("ca2");
+const body = document.getElementById("body");
 
-  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-  const guardarLocalStorage = (listaCarro) => {
+const guardarLocalStorage = (listaCarro) => {
+  localStorage.setItem("cart", JSON.stringify(listaCarro));
+};
 
-    localStorage.setItem("cart", JSON.stringify(listaCarro))
-
-  };
-
-  const dividirProductos = (size, array) => {
-
-    console.log(array.length);
-
-   
-
-    for (let index = 0; index < array.length; index += size) {
-      
-      let productosDivididos = [];
-      for (let i = 0; i < array.length; i += size)
-        productosDivididos.push(array.slice(i, i + size));
-      return productosDivididos;
-    }
-  }
-
-  const controladorProductos = {
-
-
-    productosDivididos: dividirProductos(20, arrayCatalogoLibros),
-    proximoIndex: 1,
-    limiteProductos: dividirProductos(20, arrayCatalogoLibros).length
-
-
-  }
-
-  console.log(controladorProductos.productosDivididos);
-
-
-
-
+const dividirProductos = (size, array) => {
  
-  
-  
-  const renderizarLibro = (articulo) => {
-        
+  for (let index = 0; index < array.length; index += size) {
+    let productosDivididos = [];
+    for (let i = 0; i < array.length; i += size)
+      productosDivididos.push(array.slice(i, i + size));
+    return productosDivididos;
+  }
+};
 
-      
-        const {id, titulo, precio, paginas, coleccion, autor, año, img} = articulo; 
-        
-        return `<div class="imagen-precio">
+const controladorProductos = {
+  productosDivididos: dividirProductos(20, arrayCatalogoLibros),
+  proximoIndex: 1,
+  limiteProductos: dividirProductos(20, arrayCatalogoLibros).length,
+};
+
+
+
+const renderizarLibro = (articulo) => {
+  const { id, titulo, precio, paginas, coleccion, autor, año, img } = articulo;
+
+  return `<div class="imagen-precio">
             <img src="${img}" class= "item-catalogo" id="id-libro-${id}" alt="${titulo}">
              <div class="libro-precio">
              <button class="boton-anadir" data-id ="${id}" data-titulo ="${titulo}" data-autor ="${autor}" data-img ="${img} data-precio ="${precio}""><i class="fa-solid fa-plus"></i></button>
                 <span class="precio-libro">$${precio}</span>
              </div>
-        </div>`}
+        </div>`;
+};
 
+const renderizarLibros = (index = 0, coleccion) => {
+  let todosAutores = document.querySelectorAll(".autor-lista");
 
-        const renderizarLibros = (index = 0, coleccion) => {
-          
+  todosAutores.forEach((autor) => autor.classList.remove("autor-activo"));
+  if (!coleccion) {
+    catalogo.innerHTML += controladorProductos.productosDivididos[index]
+      .map(renderizarLibro)
+      .join("");
 
-          let todosAutores = document.querySelectorAll(".autor-lista");
+    infoLibro();
+    // controladorProductos.productosDivididos[index].forEach((producto) => {
 
-          todosAutores.forEach((autor) => autor.classList.remove("autor-activo"));
-          if (!coleccion) {
+    //   let infoProducto = document.getElementById(`id-libro-${producto.id}`);
+    //   infoProducto.addEventListener("click", function(){renderizarInfoLibro(producto)})
+    // })
+  } else {
+    let productosFiltrados = arrayCatalogoLibros.filter(
+      (libros) => libros.coleccion === coleccion
+    );
 
-            
-          catalogo.innerHTML += controladorProductos.productosDivididos[index]
-          .map(renderizarLibro)
-          .join('');
+    let productosFiltradosDivididos = dividirProductos(20, productosFiltrados);
 
+    catalogo.innerHTML += productosFiltradosDivididos[index]
+      .map(renderizarLibro)
+      .join("");
+    infoLibro();
 
-          infoLibro();
-          // controladorProductos.productosDivididos[index].forEach((producto) => {
+    // productosFiltradosDivididos[index].forEach((producto) => {
 
-            
-          //   let infoProducto = document.getElementById(`id-libro-${producto.id}`);
-          //   infoProducto.addEventListener("click", function(){renderizarInfoLibro(producto)})
-          // })
+    //   console.log(producto.id)
+    //   let infoProducto = document.getElementById(`id-libro-${producto.id}`);
+    //   infoProducto.addEventListener("click", function(){renderizarInfoLibro(producto)})
+    // })
+  }
+};
 
-        }
+const mostrarLibros = (opcion) => {
+  if (opcion === "Mostrar todos") {
+    catalogo.innerHTML = "";
 
-
-        else {
-
-          let productosFiltrados = arrayCatalogoLibros.filter((libros) => libros.coleccion === coleccion)
-
-       
-
-          let productosFiltradosDivididos = dividirProductos(20, productosFiltrados);
-
-          catalogo.innerHTML += productosFiltradosDivididos[index].map(renderizarLibro).join("");
-          infoLibro();
-
-          // productosFiltradosDivididos[index].forEach((producto) => {
-
-          //   console.log(producto.id)
-          //   let infoProducto = document.getElementById(`id-libro-${producto.id}`);
-          //   infoProducto.addEventListener("click", function(){renderizarInfoLibro(producto)})
-          // })
-        }
-       
-        
-        };
-
-  const mostrarLibros = (opcion) => {
-
-   
-    if (opcion === "Mostrar todos") {
-      catalogo.innerHTML = "";
-
-      botonCarga.classList.remove("boton-oculto");
-      controladorProductos.proximoIndex = 1; 
-        renderizarLibros();
-    }
-
-    if (opcion === "Narrativa") {
-      botonCarga.classList.add("boton-oculto");
-      catalogo.innerHTML = "";
-      // let librosNarrativa = arrayCatalogoLibros.filter((libros) => libros.coleccion === "Narrativa");
-      renderizarLibros(0, "Narrativa")
-
-    }
-
-    if (opcion === "Ensayo") {
-      botonCarga.classList.add("boton-oculto");
-      catalogo.innerHTML = "";
-      // let librosEnsayo = arrayCatalogoLibros.filter((libros) => libros.coleccion === "Ensayos");
-      renderizarLibros(0, "Ensayos")
-
-    }
-
-    if (opcion === "Exotopias") {
-      botonCarga.classList.add("boton-oculto");
-      catalogo.innerHTML = "";
-      // let librosExotopias = arrayCatalogoLibros.filter((libros) => libros.coleccion === "Exotopías");
-      renderizarLibros(0, "Exotopías")
-
-    }
-
-
+    botonCarga.classList.remove("boton-oculto");
+    controladorProductos.proximoIndex = 1;
+    renderizarLibros();
   }
 
+  if (opcion === "Narrativa") {
+    botonCarga.classList.add("boton-oculto");
+    catalogo.innerHTML = "";
+    // let librosNarrativa = arrayCatalogoLibros.filter((libros) => libros.coleccion === "Narrativa");
+    renderizarLibros(0, "Narrativa");
+  }
 
-  const infoLibro = () => {
+  if (opcion === "Ensayo") {
+    botonCarga.classList.add("boton-oculto");
+    catalogo.innerHTML = "";
+    // let librosEnsayo = arrayCatalogoLibros.filter((libros) => libros.coleccion === "Ensayos");
+    renderizarLibros(0, "Ensayos");
+  }
 
-         
-    arrayCatalogoLibros.forEach((producto) => {
+  if (opcion === "Exotopias") {
+    botonCarga.classList.add("boton-oculto");
+    catalogo.innerHTML = "";
+    // let librosExotopias = arrayCatalogoLibros.filter((libros) => libros.coleccion === "Exotopías");
+    renderizarLibros(0, "Exotopías");
+  }
+};
 
-      if (document.getElementById(`id-libro-${producto.id}`)) {
+const infoLibro = () => {
+  arrayCatalogoLibros.forEach((producto) => {
+    if (document.getElementById(`id-libro-${producto.id}`)) {
       let infoProducto = document.getElementById(`id-libro-${producto.id}`);
-      infoProducto.addEventListener("click", function(){renderizarInfoLibro(producto)})
-    }})
-  
-  }
+      infoProducto.addEventListener("click", function () {
+        renderizarInfoLibro(producto);
+      });
+    }
+  });
+};
 
-mostrarNarrativa.addEventListener("click", function(){mostrarLibros("Narrativa")});
-mostrarEnsayos.addEventListener("click", function(){mostrarLibros("Ensayo")});
-mostrarExotopias.addEventListener("click", function(){mostrarLibros("Exotopias")});
-mostrarTodos.addEventListener("click", function(){mostrarLibros("Mostrar todos")});
+mostrarNarrativa.addEventListener("click", function () {
+  mostrarLibros("Narrativa");
+});
+mostrarEnsayos.addEventListener("click", function () {
+  mostrarLibros("Ensayo");
+});
+mostrarExotopias.addEventListener("click", function () {
+  mostrarLibros("Exotopias");
+});
+mostrarTodos.addEventListener("click", function () {
+  mostrarLibros("Mostrar todos");
+});
 
 const mostrarLibroAutor = (autor) => {
-
-  
   botonCarga.classList.add("boton-oculto");
   mostrarTodos.classList.remove("boton-activo");
   mostrarEnsayos.classList.remove("boton-activo");
   mostrarNarrativa.classList.remove("boton-activo");
   mostrarExotopias.classList.remove("boton-activo");
 
-  let arrayAutores = arrayCatalogoLibros.filter((libro) => libro.autor === autor);
+  let arrayAutores = arrayCatalogoLibros.filter(
+    (libro) => libro.autor === autor
+  );
   catalogo.innerHTML = "";
   catalogo.innerHTML += arrayAutores.map(renderizarLibro);
   let todosAutores = document.querySelectorAll(".autor-lista");
@@ -187,136 +156,110 @@ const mostrarLibroAutor = (autor) => {
   let autorSeleccionado = document.getElementById(`li-${autor}`);
   autorSeleccionado.classList.add("autor-activo");
   infoLibro();
-}
+};
 const renderizarAutores = () => {
-  
-  
   let listaAutores = [];
   arrayCatalogoLibros.map((libros) => {
-
     if (!listaAutores.find((elemento) => elemento === libros.autor)) {
-
-      listaAutores.push(libros.autor)
+      listaAutores.push(libros.autor);
     }
+  });
 
-    
-  })
-
-
-  autoresLista.innerHTML += listaAutores.map((autor) => `<li class="autor-lista" id="li-${autor}"> <button class="boton-autor" id="${autor}" value="${autor}">${autor}</button></li>`).join("");
+  autoresLista.innerHTML += listaAutores
+    .map(
+      (autor) =>
+        `<li class="autor-lista" id="li-${autor}"> <button class="boton-autor" id="${autor}" value="${autor}">${autor}</button></li>`
+    )
+    .join("");
 
   listaAutores.forEach((autor) => {
-
     let nuevoAutor = document.getElementById(`${autor}`);
-    nuevoAutor.addEventListener("click", function(){mostrarLibroAutor(`${autor}`)})
-  })
-  
+    nuevoAutor.addEventListener("click", function () {
+      mostrarLibroAutor(`${autor}`);
+    });
+  });
 };
 
-
-
-
 const cambiarActiveState = (coleccion) => {
-
-  
   let botonesColecciones = [...botonesMostrar];
   botonesColecciones.forEach((boton) => {
-  if(boton.dataset.coleccion !== coleccion) {
-
-   
-    boton.classList.remove("boton-activo");
-    return;
-  }
-
-  else {
-
-    
-    boton.classList.add("boton-activo");
-  }
-})
+    if (boton.dataset.coleccion !== coleccion) {
+      boton.classList.remove("boton-activo");
+      return;
+    } else {
+      boton.classList.add("boton-activo");
+    }
+  });
 };
 
 const cambiarFilterState = (e) => {
-  
   let coleccionSeleccionada = e.target.dataset.coleccion;
- 
+
   cambiarActiveState(coleccionSeleccionada);
-}
+};
 
 const aplicarFiltro = (e) => {
-
-  if(!e.target.classList.contains("boton-mostrar")) {
-
+  if (!e.target.classList.contains("boton-mostrar")) {
     return;
   }
 
   cambiarFilterState(e);
-
-}
+};
 
 const init = () => {
   renderizarLibros();
   renderizarAutores();
   botonCarga.addEventListener("click", mostrarMasProductos);
   todosBotonesMostrar.addEventListener("click", aplicarFiltro);
-
-}
+  document.addEventListener("DOMContentLoaded", renderCart);
+  document.addEventListener("DOMContentLoaded", mostrarTotal);
+};
 
 const cambiarEstadoMostrarMas = (category) => {
-
   if (!category) {
-
     botonCarga.classList.remove("boton-oculto");
 
     return;
+  } else {
+    botonCarga.classList.add("boton-oculto");
   }
-  else {
-  botonCarga.classList.add("boton-oculto")
+};
 
-}
-
-
-}
-
-const finalLista = () => controladorProductos.proximoIndex === controladorProductos.limiteProductos;
+const finalLista = () =>
+  controladorProductos.proximoIndex === controladorProductos.limiteProductos;
 
 const mostrarMasProductos = () => {
-
-  
   renderizarLibros(controladorProductos.proximoIndex);
   controladorProductos.proximoIndex++;
-  
 
   if (finalLista()) {
-
     botonCarga.classList.add("boton-oculto");
   }
 
   infoLibro();
-}
-
-const llamarInfoLibro = () => {
-
-  infoLibro();
-  let cancelarInfo = document.querySelector(".cancelar-info");
-  cancelarInfo.addEventListener("click", cerrarInfoLibro);
 };
 
+const llamarInfoLibro = () => {
+  infoLibro();
+
+  if(document.querySelector(".cancelar-info")) {
+  let cancelarInfo = document.querySelector(".cancelar-info");
+  cancelarInfo.addEventListener("click", cerrarInfoLibro);
+}
+};
 
 const cerrarInfoLibro = (id) => {
+
+  if (cajaInfoLibros) {
   cajaInfoLibros.classList.remove("visible");
-  console.log("hola");
+ 
   llamarInfoLibro();
- 
-
-
-
 }
+};
 
-const renderizarInfoLibro = (libro) =>  {
- 
-  console.log("funciono");
-  const {id, titulo, precio, paginas, coleccion, autor, año, img} = libro; 
+const renderizarInfoLibro = (libro) => {
+
+  const { id, titulo, precio, paginas, coleccion, autor, año, img } = libro;
   cajaInfoLibros.innerHTML = `
   <div class="info-libro" id="info-libro${id}">
           <div class="part-izq">
@@ -344,27 +287,25 @@ const renderizarInfoLibro = (libro) =>  {
         </div>
   
   `;
-  
-  
+
   cajaInfoLibros.classList.add("visible");
   let cancelarInfo = document.getElementById(`cancelar-info${id}`);
-  cancelarInfo.addEventListener("click", function(){cerrarInfoLibro(id)});
-  
-  
-}
+  cancelarInfo.addEventListener("click", function () {
+    cerrarInfoLibro(id);
+  });
+};
 
 const renderizarAbout = () => {
-
   let librosPorColeccion = agruparporCriterio(arrayCatalogoLibros, "coleccion");
   let librosPorAno = agruparporCriterio(arrayCatalogoLibros, "año");
-  console.log(librosPorColeccion);
+
   cajaAbout2.innerHTML = `
   <h5>nuestro catálogo</h5>
   <p>En <strong>noche unánime</strong> contamos con 3 colecciones: <strong>narrativa, ensayos, exotopías</strong>. <strong>Narrativa</strong> se encuentra dedicada al desarrollo de todo tipo de historias por autores argentinos, y cuenta con ${librosPorColeccion.Narrativa} títulos. En <strong>ensayos</strong> se despliegan algunas de las que consideramos las ideas y conceptos literarios más lúcidos del momento, y cuenta con ${librosPorColeccion.Ensayos} títulos. Por último, en <strong>exotopías</strong> nuestros lectores podrán encontrar textos inclasificables, fuera de la norma, rupturistas; la colección posee ${librosPorColeccion.Exotopías} títulos.
   <p>Hemos publicado ${librosPorAno["2019"]} libros en 2019, ${librosPorAno["2020"]} en 2020, ${librosPorAno["2021"]} en 2021 y ${librosPorAno["2022"]} en 2022. Para 2023 ya se encuentran en preparación 3 títulos nuevos.</p>
   
-  `
-}
+  `;
+};
 
 renderizarAbout();
 

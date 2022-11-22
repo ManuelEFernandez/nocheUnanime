@@ -23,6 +23,3 @@ const agruparporCriterio = (array, criterio) => {
     return resultado;
   };
   
-  console.log(agruparporCriterio(arrayCatalogoLibros, "coleccion"));
-  console.log(agruparporCriterio(arrayCatalogoLibros, "año"));
-  
