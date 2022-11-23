@@ -27,6 +27,8 @@ const toggleMenu = () => {
 }
 
 
+
+
 const toggleCarrito = () => {
    
     menuCompras.classList.toggle("mostrar-compras");

@@ -10,6 +10,9 @@ const botonCarga = document.getElementById("boton-carga");
 const cajaInfoLibros = document.getElementById("caja-info-libros");
 const cajaAbout2 = document.getElementById("ca2");
 const body = document.getElementById("body");
+const botonComprar = document.getElementById("boton-comprar");
+const botonVaciarCarrito = document.getElementById("boton-vaciar-carrito");
+const libroPrecio = document.getElementById("libro-precio");
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -38,10 +41,10 @@ const controladorProductos = {
 const renderizarLibro = (articulo) => {
   const { id, titulo, precio, paginas, coleccion, autor, año, img } = articulo;
 
-  return `<div class="imagen-precio">
+  return `<div class="imagen-precio" id="itemProducto">
             <img src="${img}" class= "item-catalogo" id="id-libro-${id}" alt="${titulo}">
-             <div class="libro-precio">
-             <button class="boton-anadir" data-id ="${id}" data-titulo ="${titulo}" data-autor ="${autor}" data-img ="${img} data-precio ="${precio}""><i class="fa-solid fa-plus"></i></button>
+             <div class="libro-precio" id="libro-precio">
+             <button class="boton-anadir" ><i class="fa-solid fa-plus sumar-carrito" data-id ="${id}" data-titulo ="${titulo}" data-autor ="${autor}" data-img ="${img}" data-precio ="${precio}"></i></button>
                 <span class="precio-libro">$${precio}</span>
              </div>
         </div>`;
@@ -213,7 +216,22 @@ const init = () => {
   todosBotonesMostrar.addEventListener("click", aplicarFiltro);
   document.addEventListener("DOMContentLoaded", renderCart);
   document.addEventListener("DOMContentLoaded", mostrarTotal);
+  disableBtns(botonComprar);
+  disableBtns(botonVaciarCarrito);
+  catalogo.addEventListener("click", addProduct)
+  
 };
+
+const disableBtns = (btn) => {
+
+  if (!cart.length) {
+
+      btn.classList.add("disabled");
+      return;
+  }
+
+  btn.classList.remove("disabled");
+}
 
 const cambiarEstadoMostrarMas = (category) => {
   if (!category) {
