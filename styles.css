@@ -592,7 +592,7 @@ body {
 
   display: none;
   position: fixed; 
-  z-index: 1; 
+  z-index: 4; 
   left: 0;
   top: 0;
   width: 100%;
@@ -1029,14 +1029,24 @@ h5 {
 
   height: auto;
   
-  background-color: rgb(179, 190, 188);
-  display: flex;
+  background-color: rgb(194, 194, 192);
+ 
   
-  padding: 40px;
+  
+  
+}
+
+.seccion-cuatro-fondo {
+  display: flex;
   justify-content: center;
   align-items: center;
+  padding: 40px;
   min-width: 360px;
   gap: 40px;
+  background-image: url(/sec4c.png);
+  background-position: -400px 0px;
+  background-size: cover;
+
 }
 
 .seccion-tres-fondo {
@@ -1173,7 +1183,7 @@ label {
 
 @media screen and (max-width: 750px) {
 
-  .seccion-cuatro {
+  .seccion-cuatro-fondo {
 
     flex-direction: column;
     
