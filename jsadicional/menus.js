@@ -14,11 +14,20 @@ const toggleMenu = () => {
   if (menuCompras.classList.contains("mostrar-compras")) {
     menuCompras.classList.remove("mostrar-compras");
   }
+
+  if (typeof cerrarInfoLibro !== "undefined") {
   cerrarInfoLibro();
+}
 };
 
 const toggleCarrito = () => {
+
+  if (carritoCompra.classList.contains("disabled")) {
+    
+    return;
+  }
   menuCompras.classList.toggle("mostrar-compras");
+
 
   if (ulHeader.classList.contains("show-menuh")) {
     ulHeader.classList.remove("show-menuh");

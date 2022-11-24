@@ -35,7 +35,7 @@ const renderCart = () => {
     return;
   }
 
-  console.log(cart);
+
   arribaCarrito.innerHTML = cart.map(renderCartProduct);
 };
 
@@ -85,7 +85,7 @@ const crearProductoCarrito = (producto) => {
 
 const addProduct = (e) => {
   if (!e.target.classList.contains("sumar-carrito")) {
-    console.log("hola");
+   
     return;
   }
 
@@ -94,8 +94,7 @@ const addProduct = (e) => {
   let producto = productData(id, name, precio, img);
 
   if (hayProductoCarrito(producto)) {
-    console.log("holaaa");
-    console.log(producto);
+  
     sumarUnidadProducto(producto);
   } else {
     crearProductoCarrito(producto);
@@ -146,12 +145,12 @@ const sumarCantidadCarrito = (id) => {
 
 const cambiarCantidad = (e) => {
   if (e.target.classList.contains("fa-plus")) {
-    console.log(`hola + ${e.target.dataset.id}`);
+ 
     sumarCantidadCarrito(e.target.dataset.id);
   } else if (e.target.classList.contains("fa-minus")) {
     restarCantidadCarrito(e.target.dataset.id);
   } else {
-    console.log("a ver");
+   
   }
   refrescarCarrito();
 };

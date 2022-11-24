@@ -1047,6 +1047,7 @@ label {
   right: 20px;
   border: 1px solid black;
   cursor: pointer;
+  z-index: 250;
 }
 
 .menu-compras {
