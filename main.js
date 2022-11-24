@@ -13,6 +13,7 @@ const body = document.getElementById("body");
 const botonComprar = document.getElementById("boton-comprar");
 const botonVaciarCarrito = document.getElementById("boton-vaciar-carrito");
 const libroPrecio = document.getElementById("libro-precio");
+const novedades = document.getElementById("novedades");
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -21,7 +22,6 @@ const guardarLocalStorage = (listaCarro) => {
 };
 
 const dividirProductos = (size, array) => {
- 
   for (let index = 0; index < array.length; index += size) {
     let productosDivididos = [];
     for (let i = 0; i < array.length; i += size)
@@ -35,8 +35,6 @@ const controladorProductos = {
   proximoIndex: 1,
   limiteProductos: dividirProductos(20, arrayCatalogoLibros).length,
 };
-
-
 
 const renderizarLibro = (articulo) => {
   const { id, titulo, precio, paginas, coleccion, autor, año, img } = articulo;
@@ -209,6 +207,22 @@ const aplicarFiltro = (e) => {
   cambiarFilterState(e);
 };
 
+const renderizarNovedad = (novedad) => {
+
+  return `<article class="novedad">
+  <h2>${novedad.titulo}</h2>
+  <p>
+  ${novedad.info}
+  </p>
+  </article>`
+  
+}
+
+const renderizarNovedades = () => {
+
+ novedades.innerHTML = infoNovedades.map(renderizarNovedad).join("");
+}
+
 const init = () => {
   renderizarLibros();
   renderizarAutores();
@@ -218,20 +232,21 @@ const init = () => {
   document.addEventListener("DOMContentLoaded", mostrarTotal);
   disableBtns(botonComprar);
   disableBtns(botonVaciarCarrito);
-  catalogo.addEventListener("click", addProduct)
-  
+  catalogo.addEventListener("click", addProduct);
+  menuCompras.addEventListener("click", cambiarCantidad);
+  botonVaciarCarrito.addEventListener("click", borrarCarrito);
+  botonComprar.addEventListener("click", terminarCompra);
+  renderizarNovedades();
 };
 
 const disableBtns = (btn) => {
-
   if (!cart.length) {
-
-      btn.classList.add("disabled");
-      return;
+    btn.classList.add("disabled");
+    return;
   }
 
   btn.classList.remove("disabled");
-}
+};
 
 const cambiarEstadoMostrarMas = (category) => {
   if (!category) {
@@ -260,23 +275,21 @@ const mostrarMasProductos = () => {
 const llamarInfoLibro = () => {
   infoLibro();
 
-  if(document.querySelector(".cancelar-info")) {
-  let cancelarInfo = document.querySelector(".cancelar-info");
-  cancelarInfo.addEventListener("click", cerrarInfoLibro);
-}
+  if (document.querySelector(".cancelar-info")) {
+    let cancelarInfo = document.querySelector(".cancelar-info");
+    cancelarInfo.addEventListener("click", cerrarInfoLibro);
+  }
 };
 
 const cerrarInfoLibro = (id) => {
-
   if (cajaInfoLibros) {
-  cajaInfoLibros.classList.remove("visible");
- 
-  llamarInfoLibro();
-}
+    cajaInfoLibros.classList.remove("visible");
+
+    llamarInfoLibro();
+  }
 };
 
 const renderizarInfoLibro = (libro) => {
-
   const { id, titulo, precio, paginas, coleccion, autor, año, img } = libro;
   cajaInfoLibros.innerHTML = `
   <div class="info-libro" id="info-libro${id}">
