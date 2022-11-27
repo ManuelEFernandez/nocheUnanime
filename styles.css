@@ -890,7 +890,8 @@ h5 {
 .form-contacto {
   padding: 20px;
   display: flex;
-  flex-direction: column;
+  flex-direction: column; 
+  justify-content: center;
 
   gap: 20px;
   border: 1px solid black;
@@ -1394,3 +1395,36 @@ label {
   transform: translateY(0);
   transition: all 0.5s ease-in;
 }
+
+.comentarios {
+
+  padding: 10px;
+  line-height: 1.5;
+}
+
+.enviar-comentarios {
+
+  height: 40px;
+  background: linear-gradient(
+    to right,
+    rgb(242, 242, 242) 60%,
+    60%,
+    rgb(44, 44, 44)
+  );
+ text-align: left;
+ padding: 10px;
+ cursor: pointer;
+ font-family: "vollkorn";
+ }
+
+.enviar-comentarios:hover {
+
+  background: linear-gradient(
+    to right,
+    rgb(44, 44, 44) 60%,
+    60%,
+    rgb(242, 242, 242)
+  );
+  color: white;
+}
+

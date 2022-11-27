@@ -14,6 +14,7 @@ const botonComprar = document.getElementById("boton-comprar");
 const botonVaciarCarrito = document.getElementById("boton-vaciar-carrito");
 const libroPrecio = document.getElementById("libro-precio");
 const novedades = document.getElementById("novedades");
+const enviarComentarios = document.getElementById("enviar-comentarios");
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -237,6 +238,11 @@ const init = () => {
   botonVaciarCarrito.addEventListener("click", borrarCarrito);
   botonComprar.addEventListener("click", terminarCompra);
   renderizarNovedades();
+  enviarComentarios.addEventListener("click", (e)  => {
+
+    e.preventDefault();
+
+  })
 };
 
 const disableBtns = (btn) => {
