@@ -234,15 +234,18 @@ const init = () => {
   disableBtns(botonComprar);
   disableBtns(botonVaciarCarrito);
   catalogo.addEventListener("click", addProduct);
+  cajaInfoLibros.addEventListener("click", addProduct);
   menuCompras.addEventListener("click", cambiarCantidad);
   botonVaciarCarrito.addEventListener("click", borrarCarrito);
   botonComprar.addEventListener("click", terminarCompra);
   renderizarNovedades();
   enviarComentarios.addEventListener("click", (e)  => {
-
+    
     e.preventDefault();
 
   })
+
+
 };
 
 const disableBtns = (btn) => {
@@ -311,7 +314,7 @@ const renderizarInfoLibro = (libro) => {
              <p class="dato-libro">${coleccion}</p>
              <p class="dato-libro">${paginas} páginas</p>
              <div class="dato-libro dato-precio">
-             <i class="fa-solid fa-plus boton-anadir"></i>
+             <button class="boton-anadir" ><i class="fa-solid fa-plus sumar-carrito" data-id ="${id}" data-titulo ="${titulo}" data-autor ="${autor}" data-img ="${img}" data-precio ="${precio}"></i></button>
              <span class="precio-libro">$${precio}</span>
              </div>
             </div>
